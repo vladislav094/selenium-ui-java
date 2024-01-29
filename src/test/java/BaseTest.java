@@ -1,22 +1,33 @@
+import application.pages.HomePage;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
-import static application.pages.HomePage.setDriver;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
-public class BaseTest {
+import static application.pages.BasePage.setDriver;
+import static org.assertj.core.api.Assertions.assertThat;
+
+abstract public class BaseTest {
+
     protected static WebDriver driver;
+
+    HomePage homePage = new HomePage();
 
     @BeforeClass
     public static void initDriver() {
         if (driver == null) {
-            System.setProperty("webdriver.chrome.driver", "src/main/java/application/resources/drivers/chromedriver");
+            WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver(getOptions());
         }
         setDriver(driver);
-        System.out.println("Init Driver was successful");
+        System.out.println("Init Driver was successful.");
     }
 
     private static ChromeOptions getOptions() {
@@ -32,8 +43,25 @@ public class BaseTest {
         driver.manage().deleteAllCookies();
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public static void tearDown() {
         driver.quit();
+    }
+
+    public void sendHeadRequestAndCheckStatusCode(String link, int expectedStatusCode) {
+
+        HttpURLConnection urlConnection = null;
+        int actualStatusCode = 0;
+        try {
+            urlConnection = (HttpURLConnection) (new URL(link)).openConnection();
+            urlConnection.setRequestMethod("HEAD");
+            actualStatusCode = urlConnection.getResponseCode();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        assertThat(actualStatusCode)
+                .as("Код ответа не соответствует ожидаемому")
+                .isEqualTo(expectedStatusCode);
     }
 }

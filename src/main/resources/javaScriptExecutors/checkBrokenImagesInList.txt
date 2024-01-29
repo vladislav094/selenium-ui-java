@@ -1,0 +1,3 @@
+var img = new Image();
+img.src = arguments[0];
+return img.complete && typeof img.naturalWidth !== 'undefined' && img.naturalWidth > 0;
