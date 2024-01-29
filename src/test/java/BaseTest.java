@@ -21,7 +21,7 @@ abstract public class BaseTest {
     HomePage homePage = new HomePage();
 
     @BeforeClass
-    public static void initDriver() {
+    public void initDriver() {
         if (driver == null) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver(getOptions());
@@ -30,7 +30,7 @@ abstract public class BaseTest {
         System.out.println("Init Driver was successful.");
     }
 
-    private static ChromeOptions getOptions() {
+    private ChromeOptions getOptions() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--no-sandbox");
@@ -44,7 +44,7 @@ abstract public class BaseTest {
     }
 
     @AfterClass(alwaysRun = true)
-    public static void tearDown() {
+    public void tearDown() {
         driver.quit();
     }
 
