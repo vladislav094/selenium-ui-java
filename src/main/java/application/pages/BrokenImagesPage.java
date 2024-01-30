@@ -13,9 +13,8 @@ import static application.utils.FileDataReader.readFile;
 
 public class BrokenImagesPage extends HomePage {
 
+    //constants
     public static final String BROKEN_IMAGES_PAGE_URL = "https://the-internet.herokuapp.com/broken_images";
-
-    //content
     public static final String BROKEN_IMAGES_HEADER_ON_PAGE = "Broken Images";
 
     //locators
@@ -27,7 +26,7 @@ public class BrokenImagesPage extends HomePage {
     }
 
     public String getHeaderWithNamePageInContent() {
-        return driver.findElement(brokenImagesHeader).getText();
+        return findElement(brokenImagesHeader).getText();
     }
 
     /**

@@ -1,14 +1,25 @@
 import application.pages.ChallengingDomPage;
 import application.pages.HomePage;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+
+import static application.pages.ChallengingDomPage.COLUMNS_NAMING_ON_PAGE;
 
 public class ChallengingDomTest extends BaseTest {
 
     ChallengingDomPage challengingDomPage = new ChallengingDomPage();
 
-    @Test
-    public void changeAnswerByClickOnButton() {
+    @BeforeMethod
+    public void clickChallengingDomLinkOnHomePage() {
         homePage.clickLink(HomePage.CHALLENGING_DOM_LINK);
-        challengingDomPage.clickButton(challengingDomPage.button);
+    }
+
+    @Test
+    public void testOrderAndNameOfColumns() {
+        ArrayList<String> currentColumnsNamingInTable = challengingDomPage.getColumnsNamingInTable();
+        Assert.assertEquals(currentColumnsNamingInTable, COLUMNS_NAMING_ON_PAGE);
     }
 }

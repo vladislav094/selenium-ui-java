@@ -11,6 +11,11 @@ public class ABTestingPageTest extends BaseTest {
 
     ABTestingPage abTestingPage = new ABTestingPage();
 
+    @BeforeMethod(description = "Переходим по ссылке 'A/B Testing' на главной странице")
+    private void clickABTestingLinkOnHomePage() {
+        homePage.clickLink(HomePage.AB_TESTING_LINK);
+    }
+
     @Test(description = "Проверяем содержание текста на странице")
     public void checkTextOnThePage() {
 
@@ -23,10 +28,5 @@ public class ABTestingPageTest extends BaseTest {
 
         String currentUrl = abTestingPage.getPageURL();
         Assert.assertEquals(currentUrl, AB_TESTING_PAGE_URL);
-    }
-
-    @BeforeMethod(description = "Переходим по ссылке 'A/B Testing' на главной странице")
-    private void clickABTestingLinkOnHomePage() {
-        homePage.clickLink(HomePage.AB_TESTING_LINK);
     }
 }

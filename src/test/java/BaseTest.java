@@ -35,6 +35,7 @@ abstract public class BaseTest {
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-extensions");
+        options.addArguments("--headless"); // без графического отображения браузерного окна
         return options;
     }
 

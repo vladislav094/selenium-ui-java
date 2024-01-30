@@ -10,6 +10,11 @@ public class BasicAuthPageTest extends BaseTest {
 
     BasicAuthPage basicAuthPage = new BasicAuthPage();
 
+    @BeforeMethod(description = "Переходим по ссылке 'Basic Auth' на главной странице")
+    private void clickBasicAuthLinkOnHomePage() {
+        homePage.clickLink(HomePage.BASIC_AUTH_LINK);
+    }
+
     @Test(description = "Проверка авторизации. Проверяем заголовок настранице и текст об успешной авторизации")
     public void checkLoginInBaseAuthentication() {
 
@@ -27,10 +32,5 @@ public class BasicAuthPageTest extends BaseTest {
 
         String currentUrl = basicAuthPage.getPageURL();
         Assert.assertEquals(currentUrl, BASIC_AUTH_PAGE_URL);
-    }
-
-    @BeforeMethod(description = "Переходим по ссылке 'Basic Auth' на главной странице")
-    private void clickBasicAuthLinkOnHomePage() {
-        homePage.clickLink(HomePage.BASIC_AUTH_LINK);
     }
 }

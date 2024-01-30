@@ -21,10 +21,10 @@ public class BasicAuthPage extends BasePage {
     }
 
     public String getHeaderWithNamePageInContent() {
-        return driver.findElement(basicAuthHeader).getText().trim();
+        return findElement(basicAuthHeader).getText().trim();
     }
 
     public String getTextAboutSuccessAuthInPageContent() {
-        return driver.findElement(successfulAuthenticationContent).getText().trim();
+        return findElement(successfulAuthenticationContent).getText().trim();
     }
 }
