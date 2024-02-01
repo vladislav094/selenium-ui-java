@@ -6,10 +6,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Properties;
 
 import static application.pages.BasePage.setDriver;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,11 +24,22 @@ abstract public class BaseTest {
 
     HomePage homePage = new HomePage();
 
-    @BeforeClass
+    @BeforeMethod
     public void initDriver() {
+        String browserName = System.getProperty("driver", "chrome");
         if (driver == null) {
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver(getOptions());
+            switch (browserName) {
+                case "chrome":
+                    WebDriverManager.chromedriver().setup();
+                    driver = new ChromeDriver(getOptions());
+                    break;
+                case "firefox":
+                    WebDriverManager.firefoxdriver().setup();
+                    driver = new ChromeDriver(getOptions());
+                    break;
+                default:
+                    System.out.println("Неверное имя браузера");
+            }
         }
         setDriver(driver);
         System.out.println("Init Driver was successful.");
@@ -35,18 +50,15 @@ abstract public class BaseTest {
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-extensions");
-        options.addArguments("--headless"); // без графического отображения браузерного окна
+//        options.addArguments("--headless"); // без графического отображения браузерного окна
         return options;
     }
 
     @AfterMethod
-    public void cleanUp() {
-        driver.manage().deleteAllCookies();
-    }
-
-    @AfterClass(alwaysRun = true)
     public void tearDown() {
-        driver.quit();
+        driver.manage().deleteAllCookies();
+        driver.close();
+//        driver.quit();
     }
 
     public void sendHeadRequestAndCheckStatusCode(String link, int expectedStatusCode) {
@@ -64,5 +76,17 @@ abstract public class BaseTest {
         assertThat(actualStatusCode)
                 .as("Код ответа не соответствует ожидаемому")
                 .isEqualTo(expectedStatusCode);
+    }
+
+    public String getFromProperties(String key) {
+        String value = null;
+        try(InputStream inputStream = new FileInputStream("~/project")){
+            Properties prop = new Properties();
+            prop.load(inputStream);
+            value = prop.getProperty(key);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return value;
     }
 }

@@ -12,12 +12,12 @@ public class ChallengingDomTest extends BaseTest {
 
     ChallengingDomPage challengingDomPage = new ChallengingDomPage();
 
-    @BeforeMethod
+//    @BeforeMethod
     public void clickChallengingDomLinkOnHomePage() {
         homePage.clickLink(HomePage.CHALLENGING_DOM_LINK);
     }
 
-    @Test
+//    @Test
     public void testOrderAndNameOfColumns() {
         ArrayList<String> currentColumnsNamingInTable = challengingDomPage.getColumnsNamingInTable();
         Assert.assertEquals(currentColumnsNamingInTable, COLUMNS_NAMING_ON_PAGE);

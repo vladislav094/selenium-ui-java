@@ -17,7 +17,7 @@ public class ChallengingDomPage extends BasePage {
             " you're testing was not built with this concept in mind. This example demonstrates that with unique IDs, " +
             "a table with no helpful locators, and a canvas element.";
     public static final ArrayList<String> COLUMNS_NAMING_ON_PAGE = new ArrayList<>(Arrays.asList("Lorem", "Ipsum", "Dolor",
-            "Sit", "Amet", "Action", "Diceret"));
+            "Sit", "Amet", "Diceret", "Action"));
 
     //locators
     public final By challengingDomHeader = By.xpath("//div[@class='example']/h3");

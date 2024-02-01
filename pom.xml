@@ -6,16 +6,24 @@
     <version>1.0</version>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+
         <testng.version>7.4.0</testng.version>
         <selenium.version>4.17.0</selenium.version>
         <webdrivermanager.version>5.6.3</webdrivermanager.version>
         <assertj-core.version>3.19.0</assertj-core.version>
         <allure-java-commons.version>2.21.0</allure-java-commons.version>
         <allure-testng.version>2.21.0</allure-testng.version>
+        <aspectj.version>1.9.2</aspectj.version>
+        <java-dotenv.version>5.2.1</java-dotenv.version>
 
-        <!--Plugin-->
+        <!--Plugins-->
+        <maven-resources-plugin.version>2.6</maven-resources-plugin.version>
         <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
-        <allure-maven.version>2.10.0</allure-maven.version>
+        <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
+        <allure-maven-plugin.version>2.10.0</allure-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -51,6 +59,16 @@
             <version>${allure-testng.version}</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>java-dotenv</artifactId>
+            <version>${java-dotenv.version}</version>
+        </dependency>
 
     </dependencies>
 
@@ -76,9 +94,51 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <systemProperties>
+                        <property>
+                            <name>allure.results.directory</name>
+                            <value>${allure.results.directory}</value>
+                        </property>
+                    </systemProperties>
+                    <testFailureIgnore>false</testFailureIgnore>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${allure.results.directory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>${allure-maven.version}</version>
+                <version>${allure-maven-plugin.version}</version>
                 <configuration>
                     <reportVersion>2.10.0</reportVersion>
                     <resultsDirectory>${basedir}/target/allure-results</resultsDirectory>

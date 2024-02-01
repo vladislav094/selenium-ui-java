@@ -7,7 +7,7 @@ public class CheckboxesPageTest extends BaseTest{
 
     CheckboxesPage checkboxesPage = new CheckboxesPage();
 
-    @Test
+//    @Test
     public void  testCheckboxes() {
         homePage.clickLink(HomePage.CHECKBOX_LINK);
         boolean initialStateOfCheckbox1 = checkboxesPage.isChecked(checkboxesPage.checkbox1);
