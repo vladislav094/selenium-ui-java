@@ -1,5 +1,5 @@
 ```
-https://the-internet.herokuapp.com/)https://the-internet.herokuapp.com/
+https://the-internet.herokuapp.com/
 ```
 ### Technology Stack Used in This Project
 - Java
