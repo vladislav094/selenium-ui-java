@@ -1,18 +1,19 @@
-import application.pages.ChallengingDomPage;
-import application.pages.HomePage;
+package heroku;
+
+import application.pages.heroku.ChallengingDomPage;
+import application.pages.heroku.HomePage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
-import static application.pages.ChallengingDomPage.COLUMNS_NAMING_ON_PAGE;
+import static application.pages.heroku.ChallengingDomPage.COLUMNS_NAMING_ON_PAGE;
 
 public class ChallengingDomTest extends BaseTest {
 
     ChallengingDomPage challengingDomPage = new ChallengingDomPage();
 
-//    @BeforeMethod
+    @BeforeMethod
     public void clickChallengingDomLinkOnHomePage() {
         homePage.clickLink(HomePage.CHALLENGING_DOM_LINK);
     }

@@ -1,6 +1,9 @@
-package application.pages;
+package application.pages.heroku;
 
-import org.openqa.selenium.By;
+import com.codeborne.selenide.SelenideElement;
+
+import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.open;
 
 public class BasicAuthPage extends BasePage {
 
@@ -12,19 +15,14 @@ public class BasicAuthPage extends BasePage {
     public static final String SUCCESS_AUTH_TEXT = "Congratulations! You must have the proper credentials.";
 
     //locators
-    public static final By basicAuthHeader = By.xpath("//div[@class='example']/h3");
-    public static final By successfulAuthenticationContent = By.xpath("//div[@class='example']/p");
+    public static final SelenideElement successfulAuthenticationContent = $x("//div[@class='example']/p");
 
     //methods for interacting with web elements
     public void loginOnBaseAuth(String login, String password) {
-        driver.get(String.format(BASIC_AUTH_PATTERN, login, password));
-    }
-
-    public String getHeaderWithNamePageInContent() {
-        return findElement(basicAuthHeader).getText().trim();
+        open(String.format(BASIC_AUTH_PATTERN, login, password));
     }
 
     public String getTextAboutSuccessAuthInPageContent() {
-        return findElement(successfulAuthenticationContent).getText().trim();
+      return  successfulAuthenticationContent.getText();
     }
 }

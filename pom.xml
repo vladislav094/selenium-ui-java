@@ -11,41 +11,32 @@
         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
 
         <testng.version>7.4.0</testng.version>
-        <selenium.version>4.17.0</selenium.version>
-        <webdrivermanager.version>5.6.3</webdrivermanager.version>
         <assertj-core.version>3.19.0</assertj-core.version>
         <allure-java-commons.version>2.21.0</allure-java-commons.version>
-        <allure-testng.version>2.21.0</allure-testng.version>
-        <aspectj.version>1.9.2</aspectj.version>
+        <allure-testng.version>2.25.0</allure-testng.version>
+        <aspectj.version>1.9.20.1</aspectj.version>
         <java-dotenv.version>5.2.1</java-dotenv.version>
+        <selenide.version>7.0.6</selenide.version>
+        <log4j.version>1.2.17</log4j.version>
+        <rest-assured.version>5.4.0</rest-assured.version>
 
         <!--Plugins-->
         <maven-resources-plugin.version>2.6</maven-resources-plugin.version>
         <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
-        <allure-maven-plugin.version>2.10.0</allure-maven-plugin.version>
+        <allure-maven-plugin.version>2.12.0</allure-maven-plugin.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>${testng.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>${webdrivermanager.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertj-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
@@ -69,7 +60,21 @@
             <artifactId>java-dotenv</artifactId>
             <version>${java-dotenv.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>${selenide.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

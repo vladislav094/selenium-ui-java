@@ -1,6 +1,9 @@
-package application.pages;
+package application.pages.heroku;
 
-import org.openqa.selenium.By;
+import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
+
+import static com.codeborne.selenide.Selenide.$x;
 
 public class ABTestingPage extends BasePage {
 
@@ -10,9 +13,10 @@ public class ABTestingPage extends BasePage {
             " best towards a desired outcome (e.g. a user action such as a click-through).";
 
     //locators
-    public static final By textOnPage = By.xpath("//div[2]/div/div//p");
+    public static final SelenideElement textOnPage = $x("//div[2]/div/div//p");
 
+    @Step("Получаем текст на странице")
     public String getTextOnPage() {
-        return driver.findElement(textOnPage).getText();
+        return textOnPage.getText();
     }
 }

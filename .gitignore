@@ -38,4 +38,8 @@ build/
 ### Mac OS ###
 .DS_Store
 
-allure-results
+### Ignore othe files and dir
+allure-results/
+allure-report/
+build
+.env

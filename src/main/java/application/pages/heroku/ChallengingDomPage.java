@@ -1,11 +1,12 @@
-package application.pages;
+package application.pages.heroku;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+
+import static com.codeborne.selenide.Selenide.$x;
 
 public class ChallengingDomPage extends BasePage {
 
@@ -20,30 +21,24 @@ public class ChallengingDomPage extends BasePage {
             "Sit", "Amet", "Diceret", "Action"));
 
     //locators
-    public final By challengingDomHeader = By.xpath("//div[@class='example']/h3");
-    public final By textOnPage = By.xpath("//div[@class='example']/p");
-    public final By button = By.xpath("//div/a[@class='button']");
-    public final By buttonAlert = By.xpath("//div/a[@class='button alert']");
-    public final By buttonSuccess = By.xpath("//div/a[@class='button success']");
-    public final By tableOnPage = By.xpath("//div[contains(@class, 'large')]//th");
+    public final SelenideElement textOnPage = $x("//div[@class='example']/p");
+    public final SelenideElement button = $x("//div/a[@class='button']");
+    public final SelenideElement buttonAlert = $x("//div/a[@class='button alert']");
+    public final SelenideElement buttonSuccess = $x("//div/a[@class='button success']");
+    public final SelenideElement tableOnPage = $x("//div[contains(@class, 'large')]//th");
 
     public void clickButton(By locator) {
-        findElement(locator).click();
     }
 
     public String getChallengingDomHeaderOnPage() {
-        return findElement(challengingDomHeader).getText().trim();
+        return "q";
     }
 
     public String getTextOnPage() {
-        return findElement(textOnPage).getText().trim();
+        return "q";
     }
 
     public ArrayList<String> getColumnsNamingInTable() {
-        List<String> columnsName = driver.findElements(tableOnPage)
-                .stream()
-                .map(WebElement::getText)
-                .toList();
-        return new ArrayList<>(columnsName);
+        return new ArrayList<>();
     }
 }

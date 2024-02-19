@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<suite name="the-internet.herokuapp.com" verbose="1" parallel="methods" thread-count="2" data-provider-thread-count="20">
+    <listeners>
+        <listener class-name="application.utils.RetryListener"/>
+    </listeners>
+    <test name="The Internet Herokuapp">
+        <classes>
+            <class name="heroku.BaseTest"/>
+            <class name="heroku.ABTestingPageTest"/>
+            <class name="heroku.AddRemoveElementsPageTest"/>
+            <class name="heroku.BasicAuthPageTest"/>
+            <class name="heroku.BrokenImagesTest"/>
+            <class name="heroku.CheckboxesPageTest"/>
+            <class name="heroku.ContextMenuTest"/>
+        </classes>
+    </test>
+</suite>

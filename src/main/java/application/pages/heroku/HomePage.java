@@ -1,15 +1,18 @@
-package application.pages;
+package application.pages.heroku;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
+
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class HomePage extends BasePage {
 
-//    Actions actions = new Actions(driver);
 
     protected final String HOME_URL = "https://the-internet.herokuapp.com/";
-    public static final By abTestingLink = By.xpath("//ul/li/a[text()='A/B Testing']");
-    public static final By basicAuthLink = By.xpath("//div/div/ul/li[3]/a");
+    public static final SelenideElement abTestingLink = $x("//ul/li/a[text()='A/B Testing']");
+    public static final SelenideElement basicAuthLink = $x("//div/div/ul/li[3]/a");
+    private static final SelenideElement headerOnPage = $x("//div[@class='example']/h3");
 
     //Названия ссылок (страницы) на главной страницы
     public static final String AB_TESTING_LINK = "A/B Testing";
@@ -21,7 +24,10 @@ public class HomePage extends BasePage {
     public static final String CONTEXT_MENU_LINK = "Context Menu";
 
     public void clickLink(String link) {
-        driver.get(HOME_URL);
-        driver.findElement(By.linkText(link)).click();
+        $(By.linkText(link)).click();
+    }
+
+    public static String getHeaderWithNamePageInContent() {
+        return headerOnPage.getText();
     }
 }
